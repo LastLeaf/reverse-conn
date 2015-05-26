@@ -1,9 +1,9 @@
 {
 	"password": "password",
-	"timeout": "20000",
+	"timeout": 20000,
 	"pubServerAddr": "127.0.0.1",
-	"pubClientPort": "24760",
-	"pubRedirectorPort": "24761",
+	"pubClientPort": 1100,
+	"pubRedirectorPort": 1101,
 	"redirectAddr": "127.0.0.1",
-	"redirectPort": "80"
+	"redirectPort": 80
 }
