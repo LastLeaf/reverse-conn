@@ -30,14 +30,6 @@ var dataConnect = function(connId){
 			console.log('Data [' + connId + '] connected to destination (server side).');
 			connMap[connId].redirect = redirect;
 			clearTimeout(initTobj);
-			redirect.on('error', function(err){
-				console.log('Data [' + connId + '] error from server side: ' + err.message);
-			});
-			redirect.on('close', function(){
-				console.log('Data [' + connId + '] disconnected from server side.');
-				delete connMap[connId];
-				conn.end();
-			});
 			redirect.on('data', function(data){
 				conn.write(data);
 			});
@@ -45,6 +37,14 @@ var dataConnect = function(connId){
 				redirect.write(data);
 			});
 			conn.resume();
+		});
+		redirect.on('error', function(err){
+			console.log('Data [' + connId + '] error from server side: ' + err.message);
+		});
+		redirect.on('close', function(){
+			console.log('Data [' + connId + '] disconnected from server side.');
+			delete connMap[connId];
+			conn.end();
 		});
 	});
 	var initTobj = setTimeout(function(){

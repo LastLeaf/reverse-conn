@@ -1,6 +1,6 @@
 # reverse-conn
 
-A small tool helping you go inside a protected or NAT network from other networks.
+A small tool helping you go inside a protected or NAT network from other networks. Written in node.js.
 
 # WTF?
 
@@ -41,6 +41,9 @@ Clone this code. Write an `config.json`. There is a sample.
 * `pubClientPort` is the port for clients.
 * `pubRedirectorPort` is the port for redirector.
 * `redirectAddr` and `redirectPort` specifies the destination service.
+
+Run "node pub.js" in pub server, and "node redirector.js" in redirector.
+It is awful if redirector is down, so you might use `nodemon` or something else to keep it running.
 
 For example, if you want to connect to SSH service in 192.168.1.100 from outer network:
 
