@@ -46,6 +46,7 @@ var dataConnect = function(connId){
 			delete connMap[connId];
 			conn.end();
 		});
+		redirect.setKeepAlive(true);
 	});
 	var initTobj = setTimeout(function(){
 		conn.end();
@@ -60,6 +61,7 @@ var dataConnect = function(connId){
 		if(connObj.redirect) connObj.redirect.end();
 		delete connMap[connId];
 	});
+	conn.setKeepAlive(true);
 };
 
 // build control connection
@@ -82,6 +84,11 @@ var reconnect = function(){
 				};
 				dataConnect(connId);
 			});
+		});
+		// timeout
+		controlConn.setKeepAlive(true, config.timeout);
+		controlConn.setTimeout(config.timeout * 4, function(){
+			controlConn.end();
 		});
 	});
 	controlConn.on('error', function(err){
